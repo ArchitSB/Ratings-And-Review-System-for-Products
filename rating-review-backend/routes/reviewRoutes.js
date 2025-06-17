@@ -3,8 +3,9 @@ const router = express.Router();
 const controller = require("../controllers/reviewController");
 const multer = require("multer");
 const path = require("path");
+const auth = require("../middlewares/jwt");
 
-// Store uploads in /uploads
+
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {
     cb(null, path.join(__dirname, "../uploads"));
@@ -15,6 +16,6 @@ const storage = multer.diskStorage({
 });
 const upload = multer({ storage });
 
-router.post("/", upload.single("photo"), controller.createReview);
+router.post("/", auth, upload.single("photo"), controller.createReview);
 
 module.exports = router;

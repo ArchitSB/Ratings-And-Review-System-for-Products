@@ -251,3 +251,16 @@ svg[stroke="#fbbf24"]:hover {
   padding: 0;
   margin: 0;
 }
+
+input[type="text"], input[type="email"], input[type="password"] {
+  font-size: 1rem;
+  border: 1px solid #d1d5db;
+  border-radius: 6px;
+  padding: 8px;
+  margin-bottom: 12px;
+  outline: none;
+  transition: border 0.2s;
+}
+input[type="text"]:focus, input[type="email"]:focus, input[type="password"]:focus {
+  border: 1.5px solid #7c3aed;
+}

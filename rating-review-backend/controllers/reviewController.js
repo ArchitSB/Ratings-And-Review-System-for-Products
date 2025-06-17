@@ -1,8 +1,7 @@
 const { Review } = require("../models");
 
 exports.createReview = async (req, res) => {
-  
-  const { userId, productId, rating, reviewText } = req.body;
+  const { productId, rating, reviewText } = req.body;
   let photo_url = null;
   if (req.file) {
     photo_url = `/uploads/${req.file.filename}`;
@@ -16,7 +15,7 @@ exports.createReview = async (req, res) => {
       rating,
       review_text: reviewText,
       photo_url,
-      UserId: userId,
+      UserId: req.user.id, 
       ProductId: productId,
     });
     res.json(review);

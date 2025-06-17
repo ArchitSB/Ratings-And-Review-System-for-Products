@@ -1,15 +1,16 @@
 const sequelize = require('./config/db');
 const { User, Product, Review } = require('./models');
+const bcrypt = require("bcryptjs");
 
 const seedData = async () => {
   try {
     await sequelize.sync({ force: true });
 
-    const users = await User.bulkCreate([
-      { name: 'Archit Singh', email: 'archit@example.com' },
-      { name: 'Priya Sharma', email: 'priya@example.com' },
-      { name: 'Rahul Verma', email: 'rahul@example.com' },
-      { name: 'Sneha Patel', email: 'sneha@example.com' }
+    const users = await Promise.all([
+      User.create({ name: 'Archit Singh', email: 'archit@example.com', password: await bcrypt.hash('password1', 10) }),
+      User.create({ name: 'Priya Sharma', email: 'priya@example.com', password: await bcrypt.hash('password2', 10) }),
+      User.create({ name: 'Rahul Verma', email: 'rahul@example.com', password: await bcrypt.hash('password3', 10) }),
+      User.create({ name: 'Sneha Patel', email: 'sneha@example.com', password: await bcrypt.hash('password4', 10) }),
     ]);
 
     const products = await Product.bulkCreate([

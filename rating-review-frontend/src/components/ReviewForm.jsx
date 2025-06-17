@@ -1,8 +1,10 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import axios from "axios";
 import StarRatingInput from "./StarRatingInput";
+import { AuthContext } from "../utils/AuthContext";
 
 function ReviewForm({ productId, onReviewSubmitted }) {
+  const { token, user } = useContext(AuthContext);
   const [rating, setRating] = useState(0);
   const [review, setReview] = useState("");
   const [photo, setPhoto] = useState(null);
@@ -10,6 +12,10 @@ function ReviewForm({ productId, onReviewSubmitted }) {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    if (!token) {
+      setError("You must be logged in to submit a review.");
+      return;
+    }
     if (!rating && !review) {
       setError("Please provide at least a rating or a review.");
       return;
@@ -17,13 +23,15 @@ function ReviewForm({ productId, onReviewSubmitted }) {
     try {
       const formData = new FormData();
       formData.append("productId", productId);
-      formData.append("userId", 3); // Hardcoded user
       formData.append("rating", rating);
       formData.append("reviewText", review);
       if (photo) formData.append("photo", photo);
 
       await axios.post("http://localhost:5000/api/reviews", formData, {
-        headers: { "Content-Type": "multipart/form-data" }
+        headers: {
+          "Content-Type": "multipart/form-data",
+          Authorization: `Bearer ${token}`,
+        }
       });
       setRating(0);
       setReview("");
@@ -34,6 +42,10 @@ function ReviewForm({ productId, onReviewSubmitted }) {
       setError(err.response?.data?.message || "Failed to submit review.");
     }
   };
+
+  if (!token) {
+    return <div style={{ color: "#b91c1c", margin: "16px 0" }}>Please log in to submit a review.</div>;
+  }
 
   return (
     <form onSubmit={handleSubmit} className="review-form" encType="multipart/form-data">
