@@ -10,16 +10,20 @@ function ProductDetails() {
   const [product, setProduct] = useState({});
   const [summary, setSummary] = useState({});
   const [reviews, setReviews] = useState([]);
-  const [tags, setTags] = useState([]); // <-- Add this
+  const [tags, setTags] = useState([]); 
+
+
 
   const fetchReviews = () => {
     axios.get(`http://localhost:5000/api/products/${id}/reviews`)
       .then(res => setReviews(res.data));
   };
 
+
   useEffect(() => {
     axios.get(`http://localhost:5000/api/products/${id}`)
       .then(res => setProduct(res.data));
+
 
     axios.get(`http://localhost:5000/api/products/${id}/summary`)
       .then(res => setSummary(res.data));
@@ -27,7 +31,9 @@ function ProductDetails() {
     axios.get(`http://localhost:5000/api/products/${id}/tags`)
       .then(res => setTags(res.data.tags || []));
 
+
     fetchReviews();
+
   }, [id]);
 
   return (
@@ -73,6 +79,7 @@ function ProductDetails() {
 
       <ReviewForm productId={id} onReviewSubmitted={fetchReviews} />
       <ReviewList reviews={reviews} />
+      
     </div>
   );
 }

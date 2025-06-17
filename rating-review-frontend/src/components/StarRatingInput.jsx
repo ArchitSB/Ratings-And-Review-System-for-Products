@@ -3,9 +3,11 @@ import React, { useState } from "react";
 export default function StarRatingInput({ value, onChange, max = 5, size = 28 }) {
   const [hovered, setHovered] = useState(0);
 
+  
   return (
     <div style={{ display: "inline-flex", gap: 2, cursor: "pointer" }}>
       {Array.from({ length: max }, (_, i) => (
+
         <svg
           key={i}
           width={size}

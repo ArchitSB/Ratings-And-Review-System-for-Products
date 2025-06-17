@@ -3,6 +3,7 @@ import axios from "axios";
 import { AuthContext } from "../utils/AuthContext";
 import { useNavigate, Link } from "react-router-dom";
 
+
 export default function Signup() {
   const { setUser, setToken } = useContext(AuthContext);
   const [name, setName] = useState("");
@@ -10,6 +11,7 @@ export default function Signup() {
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
   const navigate = useNavigate();
+
 
   const handleSubmit = async e => {
     e.preventDefault();
@@ -25,6 +27,7 @@ export default function Signup() {
     }
   };
 
+
   return (
     <div className="product-details-container" style={{ maxWidth: 400 }}>
       <h2>Sign Up</h2>
@@ -37,7 +40,9 @@ export default function Signup() {
           onChange={e => setName(e.target.value)}
           style={{ width: "100%", marginBottom: 12, padding: 8, borderRadius: 6, border: "1px solid #ccc" }}
         />
+
         <label>Email:</label>
+
         <input
           type="email"
           value={email}
@@ -46,6 +51,7 @@ export default function Signup() {
           style={{ width: "100%", marginBottom: 12, padding: 8, borderRadius: 6, border: "1px solid #ccc" }}
         />
         <label>Password:</label>
+
         <input
           type="password"
           value={password}
@@ -56,6 +62,7 @@ export default function Signup() {
         {error && <div style={{ color: "#b91c1c", marginBottom: 10 }}>{error}</div>}
         <button type="submit" className="view-btn" style={{ width: "100%" }}>Sign Up</button>
       </form>
+      
       <div style={{ marginTop: 18, textAlign: "center" }}>
         Already have an account? <Link to="/login">Login</Link>
       </div>

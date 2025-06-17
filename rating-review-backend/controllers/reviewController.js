@@ -3,12 +3,14 @@ const { Review } = require("../models");
 exports.createReview = async (req, res) => {
   const { productId, rating, reviewText } = req.body;
   let photo_url = null;
+
   if (req.file) {
     photo_url = `/uploads/${req.file.filename}`;
   }
   if (!rating && !reviewText) {
     return res.status(400).json({ message: "Rating or Review required." });
   }
+
 
   try {
     const review = await Review.create({
@@ -18,8 +20,10 @@ exports.createReview = async (req, res) => {
       UserId: req.user.id, 
       ProductId: productId,
     });
+
     res.json(review);
   } catch (err) {
+    
     if (err.name === "SequelizeUniqueConstraintError") {
       res.status(400).json({ message: "You already reviewed this product." });
     } else {
