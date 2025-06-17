@@ -181,6 +181,5 @@ A: Make sure the backend is running and serving `/uploads` statically. If deploy
 ---
 
 ## 📄 License
-
-This project is for educational/demo purposes.  
+  
 Feel free to use and modify for your own
