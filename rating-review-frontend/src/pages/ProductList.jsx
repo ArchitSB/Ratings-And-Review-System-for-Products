@@ -12,7 +12,7 @@ function ProductList() {
   }, []);
 
   return (
-    <div style={{ display: "flex", flexWrap: "wrap", gap: "20px", justifyContent: "center", marginTop: "30px" }}>
+    <div className="product-list-container">
       {products.map(product => (
         <ProductCard key={product.id} product={product} />
       ))}

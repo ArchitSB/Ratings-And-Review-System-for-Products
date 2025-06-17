@@ -1,8 +1,9 @@
 import React, { useState } from "react";
 import axios from "axios";
+import StarRatingInput from "./StarRatingInput";
 
 function ReviewForm({ productId, onReviewSubmitted }) {
-  const [rating, setRating] = useState("");
+  const [rating, setRating] = useState(0);
   const [review, setReview] = useState("");
   const [error, setError] = useState("");
 
@@ -15,11 +16,11 @@ function ReviewForm({ productId, onReviewSubmitted }) {
     try {
       await axios.post("http://localhost:5000/api/reviews", {
         productId,
-        userId: 1, // For now hardcoding the user
+        userId: 1, 
         rating,
         reviewText: review
       });
-      setRating("");
+      setRating(0);
       setReview("");
       setError("");
       onReviewSubmitted();
@@ -29,15 +30,14 @@ function ReviewForm({ productId, onReviewSubmitted }) {
   };
 
   return (
-    <form onSubmit={handleSubmit} style={{ marginTop: "20px" }}>
+    <form onSubmit={handleSubmit} className="review-form">
       <h4>Submit a Review:</h4>
-      <label>Rating (1-5): </label>
-      <input type="number" min="1" max="5" value={rating}
-             onChange={(e) => setRating(e.target.value)} />
-      <br />
+      <label>Rating: </label>
+      <span className="star-rating-input">
+        <StarRatingInput value={rating} onChange={setRating} />
+      </span>
       <label>Review: </label>
-      <textarea value={review} onChange={(e) => setReview(e.target.value)} />
-      <br />
+      <textarea value={review} onChange={(e) => setReview(e.target.value)} rows={3} />
       {error && <p style={{ color: "red" }}>{error}</p>}
       <button type="submit">Submit</button>
     </form>

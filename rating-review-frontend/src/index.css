@@ -1,68 +1,253 @@
 :root {
-  font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
-  line-height: 1.5;
-  font-weight: 400;
-
-  color-scheme: light dark;
-  color: rgba(255, 255, 255, 0.87);
-  background-color: #242424;
-
-  font-synthesis: none;
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
-
-a {
-  font-weight: 500;
-  color: #646cff;
-  text-decoration: inherit;
-}
-a:hover {
-  color: #535bf2;
+  --primary: #7c3aed;
+  --primary-dark: #5b21b6;
+  --accent: #fbbf24;
+  --bg: #f3f4f6;
+  --surface: #fff;
+  --text: #22223b;
+  --muted: #a1a1aa;
+  --shadow: 0 4px 24px rgba(124,58,237,0.08);
 }
 
 body {
   margin: 0;
-  display: flex;
-  place-items: center;
-  min-width: 320px;
-  min-height: 100vh;
+  font-family: 'Inter', 'Segoe UI', 'Roboto', Arial, sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  background: var(--bg), url('https://www.transparenttextures.com/patterns/symphony.png');
 }
 
-h1 {
-  font-size: 3.2em;
-  line-height: 1.1;
+.app-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 32px 16px;
 }
 
-button {
-  border-radius: 8px;
-  border: 1px solid transparent;
-  padding: 0.6em 1.2em;
-  font-size: 1em;
+h1, h2, h3, h4 {
+  color: var(--primary-dark);
+  margin-bottom: 12px;
+  font-weight: 700;
+}
+
+a {
+  color: var(--primary);
+  text-decoration: none;
   font-weight: 500;
-  font-family: inherit;
-  background-color: #1a1a1a;
-  cursor: pointer;
-  transition: border-color 0.25s;
-}
-button:hover {
-  border-color: #646cff;
-}
-button:focus,
-button:focus-visible {
-  outline: 4px auto -webkit-focus-ring-color;
+  transition: color 0.2s;
 }
 
-@media (prefers-color-scheme: light) {
-  :root {
-    color: #213547;
-    background-color: #ffffff;
-  }
-  a:hover {
-    color: #747bff;
-  }
-  button {
-    background-color: #f9f9f9;
-  }
+a:hover {
+  color: var(--accent);
+}
+
+.header-bar {
+  background: var(--primary);
+  padding: 18px 0;
+  text-align: center;
+  margin-bottom: 24px;
+  box-shadow: var(--shadow);
+}
+
+.header-title {
+  color: #fff;
+  font-size: 2rem;
+  font-weight: 700;
+  text-decoration: none;
+  letter-spacing: 1px;
+  transition: color 0.2s;
+}
+
+.header-title:hover {
+  color: var(--accent);
+}
+
+::-webkit-scrollbar {
+  width: 8px;
+  background: var(--bg);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--primary);
+  border-radius: 8px;
+}
+
+.product-card {
+  background: var(--surface);
+  border-radius: 18px;
+  box-shadow: var(--shadow);
+  padding: 24px 18px;
+  width: 270px;
+  text-align: center;
+  transition: transform 0.18s cubic-bezier(.4,2,.6,1), box-shadow 0.18s;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.product-card:hover {
+  transform: translateY(-8px) scale(1.03) rotate(-1deg);
+  box-shadow: 0 8px 32px 0 rgba(124,58,237,0.18), 0 0 0 4px #fbbf2433;
+}
+
+.product-img {
+  width: 100%;
+  height: 160px;
+  object-fit: cover;
+  border-radius: 12px;
+  margin-bottom: 14px;
+  box-shadow: 0 2px 8px rgba(124,58,237,0.07);
+}
+
+.product-list-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 40px 36px; 
+  justify-content: center;
+  margin-top: 30px;
+}
+
+.product-details-container {
+  background: var(--surface);
+  border-radius: 18px;
+  box-shadow: var(--shadow);
+  padding: 36px 32px 32px 32px;
+  max-width: 650px;
+  margin: 40px auto 32px auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.product-details-img {
+  width: 100%;
+  max-width: 340px;
+  height: auto;
+  border-radius: 14px;
+  margin-bottom: 18px;
+  box-shadow: 0 2px 12px rgba(124,58,237,0.10);
+}
+
+.product-details-container h2 {
+  font-size: 2.1rem;
+  margin-bottom: 10px;
+}
+
+.product-details-container p {
+  color: var(--muted);
+  font-size: 1.1rem;
+  margin-bottom: 18px;
+  text-align: center;
+}
+.view-btn {
+  margin-top: 14px;
+  background: linear-gradient(90deg, var(--primary), var(--accent));
+  color: #fff;
+  padding: 10px 24px;
+  border-radius: 8px;
+  font-weight: 600;
+  font-size: 1.1rem;
+  border: none;
+  cursor: pointer;
+  box-shadow: 0 2px 8px rgba(124,58,237,0.10);
+  transition: background 0.3s, transform 0.15s, box-shadow 0.2s;
+  position: relative;
+  overflow: hidden;
+  z-index: 1;
+}
+
+.view-btn::before {
+  content: "";
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 0;
+  height: 0;
+  background: rgba(251,191,36,0.18);
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  transition: width 0.4s cubic-bezier(.4,2,.6,1), height 0.4s cubic-bezier(.4,2,.6,1);
+  z-index: -1;
+}
+
+.view-btn:hover {
+  background: linear-gradient(90deg, var(--accent), var(--primary));
+  color: #fff;
+  transform: scale(1.07) translateY(-2px);
+  box-shadow: 0 6px 24px rgba(251,191,36,0.16);
+}
+
+.view-btn:hover::before {
+  width: 220%;
+  height: 500%;
+}
+
+svg[stroke="#fbbf24"]:hover {
+  transform: scale(1.18) rotate(-8deg);
+  filter: drop-shadow(0 2px 6px #fbbf2466);
+  transition: transform 0.18s, filter 0.18s;
+}
+
+
+.review-form label {
+  font-weight: 500;
+  margin-top: 12px;
+  display: block;
+}
+
+.review-form > label:first-of-type {
+  margin-top: 0;
+}
+
+.review-form .star-rating-input {
+  margin-bottom: 16px;
+  display: block;
+}
+
+.review-form {
+  margin-top: 24px;
+  background: #f1f5fb;
+  padding: 18px 20px;
+  border-radius: 8px;
+  margin-bottom: 32px; 
+}
+
+.review-form button {
+  background: linear-gradient(90deg, var(--primary), var(--accent));
+  color: #fff;
+  border: none;
+  padding: 8px 18px;
+  border-radius: 8px;
+  font-weight: 700;
+  font-size: 1rem;
+  cursor: pointer;
+  margin-top: 18px;
+  box-shadow: 0 2px 8px rgba(124,58,237,0.10);
+  transition: background 0.3s, transform 0.15s, box-shadow 0.2s;
+  position: relative;
+  left: 50%;
+  transform: translateX(-50%);
+  display: block;
+}
+
+.review-form button::before {
+  display: none;
+}
+
+.review-form button:hover {
+  background: linear-gradient(90deg, var(--accent), var(--primary));
+  color: #fff;
+  transform: translateX(-50%) scale(1.07);
+  box-shadow: 0 6px 24px rgba(251,191,36,0.16);
+}
+
+.review-form button:hover::before {
+  width: 220%;
+  height: 500%;
+}
+
+.review-list ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
 }

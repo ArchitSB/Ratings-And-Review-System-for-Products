@@ -3,6 +3,8 @@ import { useParams } from "react-router-dom";
 import axios from "axios";
 import ReviewForm from "../components/ReviewForm";
 import ReviewList from "../components/ReviewList";
+import StarRatingDisplay from "../components/StarRatingDisplay";
+
 
 function ProductDetails() {
   const { id } = useParams();
@@ -26,12 +28,25 @@ function ProductDetails() {
   }, [id]);
 
   return (
-    <div style={{ padding: "20px" }}>
+     <div className="product-details-container">
       <h2>{product.name}</h2>
-      <img src={product.image_url} alt={product.name} style={{ width: "300px", height: "auto" }} />
+      <img src={product.image_url} alt={product.name} className="product-details-img" />
       <p>{product.description}</p>
 
-      <h3>Average Rating: {summary.avgRating || "Not rated yet"}</h3>
+      <div style={{ margin: "18px 0 24px 0", width: "100%", textAlign: "center" }}>
+        <h3 style={{ marginBottom: 6 }}>
+          Average Rating:{" "}
+          {summary.avgRating
+            ? <>
+                <StarRatingDisplay value={Math.round(summary.avgRating)} />
+                <span style={{ marginLeft: 8, color: "#fbbf24" }}>
+                  {Number(summary.avgRating).toFixed(1)}
+                </span>
+              </>
+            : "Not rated yet"}
+        </h3>
+        <hr style={{ border: "none", borderTop: "1.5px dashed #e5e7eb", margin: "18px 0 0 0" }} />
+      </div>
 
       <ReviewForm productId={id} onReviewSubmitted={fetchReviews} />
       <ReviewList reviews={reviews} />
