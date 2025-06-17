@@ -5,12 +5,12 @@ import ReviewForm from "../components/ReviewForm";
 import ReviewList from "../components/ReviewList";
 import StarRatingDisplay from "../components/StarRatingDisplay";
 
-
 function ProductDetails() {
   const { id } = useParams();
   const [product, setProduct] = useState({});
   const [summary, setSummary] = useState({});
   const [reviews, setReviews] = useState([]);
+  const [tags, setTags] = useState([]); // <-- Add this
 
   const fetchReviews = () => {
     axios.get(`http://localhost:5000/api/products/${id}/reviews`)
@@ -24,15 +24,38 @@ function ProductDetails() {
     axios.get(`http://localhost:5000/api/products/${id}/summary`)
       .then(res => setSummary(res.data));
 
+    axios.get(`http://localhost:5000/api/products/${id}/tags`)
+      .then(res => setTags(res.data.tags || []));
+
     fetchReviews();
   }, [id]);
 
   return (
-     <div className="product-details-container">
+    <div className="product-details-container">
       <h2>{product.name}</h2>
       <img src={product.image_url} alt={product.name} className="product-details-img" />
       <p>{product.description}</p>
 
+      {/* Show tags */}
+      {tags.length > 0 && (
+        <div style={{ margin: "10px 0 18px 0" }}>
+          <strong style={{ color: "#7c3aed" }}>Popular Tags: </strong>
+          {tags.map(tag => (
+            <span key={tag} style={{
+              display: "inline-block",
+              background: "#ede9fe",
+              color: "#5b21b6",
+              borderRadius: "12px",
+              padding: "3px 12px",
+              margin: "0 6px 6px 0",
+              fontSize: "0.98rem",
+              fontWeight: 500
+            }}>{tag}</span>
+          ))}
+        </div>
+      )}
+
+      {/* ...rest of your component... */}
       <div style={{ margin: "18px 0 24px 0", width: "100%", textAlign: "center" }}>
         <h3 style={{ marginBottom: 6 }}>
           Average Rating:{" "}

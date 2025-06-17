@@ -7,6 +7,7 @@ const Review = sequelize.define("Review", {
     validate: { min: 1, max: 5 },
   },
   review_text: DataTypes.TEXT,
+  photo_url: DataTypes.TEXT,
 }, {
   indexes: [{ unique: true, fields: ["UserId", "ProductId"] }]
 });
