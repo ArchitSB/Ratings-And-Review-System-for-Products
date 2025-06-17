@@ -1,4 +1,4 @@
-const { Product, Review } = require("../models");
+const { Product, Review, User } = require("../models");
 const { Sequelize } = require("sequelize");
 const stopwords = require('stopwords').english; 
 
@@ -23,7 +23,7 @@ exports.getReviewSummary = async (req, res) => {
 exports.getProductReviews = async (req, res) => {
   const reviews = await Review.findAll({
     where: { ProductId: req.params.id },
-    include: ["User"],
+    include: [User],
   });
   res.json(reviews);
 };

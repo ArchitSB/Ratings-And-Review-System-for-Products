@@ -14,6 +14,19 @@ function ReviewList({ reviews }) {
               <div style={{ fontWeight: 500, marginBottom: 6 }}>
                 {r.review_text || "—"}
               </div>
+              {r.photo_url && (
+                <img
+                  src={`http://localhost:5000${r.photo_url}`}
+                  alt="Review"
+                  style={{
+                    maxWidth: 120,
+                    maxHeight: 120,
+                    borderRadius: 8,
+                    marginBottom: 8,
+                    display: "block"
+                  }}
+                />
+              )}
               <StarRatingDisplay value={r.rating || 0} />
             </div>
           ))}
