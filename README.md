@@ -10,6 +10,12 @@ A full-stack web application for product ratings and reviews, featuring authenti
 
 ---
 
+## 🗺️ GoogleDocs(ER Daigram)
+
+👉 **[View the ER Diagram (Google Docs)](https://docs.google.com/document/d/1OZXcGsGEhGA9obhLfM4NdZN5eTfhqB-A-zuSU8UL_DQ/edit?usp=sharing)**
+
+---
+
 ## 🚀 Features
 
 - **User Authentication:** Sign up, log in, and log out securely (JWT-based).
