@@ -163,8 +163,8 @@ rating-review-system/
 
 ## 📦 Deployment
 
-- Deploy the backend (Express) to [Render](https://render.com/), [Heroku](https://heroku.com/), or similar.
-- Deploy the frontend (React) to [Vercel](https://vercel.com/), [Netlify](https://netlify.com/), or similar.
+- Deploy the backend (Express) to [Render](https://render.com/), [Heroku](https://heroku.com/), or similar. I have deployed it on Render.
+- Deploy the frontend (React) to [Vercel](https://vercel.com/), [Netlify](https://netlify.com/), or similar. I have deployed my frontend on Vercel
 - Update API URLs in the frontend if deploying to production.
 
 ---
