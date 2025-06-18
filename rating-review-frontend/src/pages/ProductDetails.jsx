@@ -4,6 +4,7 @@ import axios from "axios";
 import ReviewForm from "../components/ReviewForm";
 import ReviewList from "../components/ReviewList";
 import StarRatingDisplay from "../components/StarRatingDisplay";
+const API_URL = import.meta.env.VITE_API_URL;
 
 function ProductDetails() {
   const { id } = useParams();
@@ -13,22 +14,21 @@ function ProductDetails() {
   const [tags, setTags] = useState([]); 
 
 
-
   const fetchReviews = () => {
-    axios.get(`http://localhost:5000/api/products/${id}/reviews`)
+    axios.get(`${API_URL}/api/products/${id}/reviews`)
       .then(res => setReviews(res.data));
   };
 
 
   useEffect(() => {
-    axios.get(`http://localhost:5000/api/products/${id}`)
+    axios.get(`${API_URL}/api/products/${id}`)
       .then(res => setProduct(res.data));
 
 
-    axios.get(`http://localhost:5000/api/products/${id}/summary`)
+    axios.get(`${API_URL}/api/products/${id}/summary`)
       .then(res => setSummary(res.data));
 
-    axios.get(`http://localhost:5000/api/products/${id}/tags`)
+    axios.get(`${API_URL}/api/products/${id}/tags`)
       .then(res => setTags(res.data.tags || []));
 
 

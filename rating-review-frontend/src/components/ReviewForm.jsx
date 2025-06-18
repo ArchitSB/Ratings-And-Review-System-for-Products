@@ -3,6 +3,8 @@ import axios from "axios";
 import StarRatingInput from "./StarRatingInput";
 import { AuthContext } from "../utils/AuthContext";
 
+const API_URL = import.meta.env.VITE_API_URL;
+
 function ReviewForm({ productId, onReviewSubmitted }) {
   const { token, user } = useContext(AuthContext);
   const [rating, setRating] = useState(0);
@@ -27,7 +29,7 @@ function ReviewForm({ productId, onReviewSubmitted }) {
       formData.append("reviewText", review);
       if (photo) formData.append("photo", photo);
 
-      await axios.post("http://localhost:5000/api/reviews", formData, {
+      await axios.post(`${API_URL}/api/reviews`, formData, {
         headers: {
           "Content-Type": "multipart/form-data",
           Authorization: `Bearer ${token}`,

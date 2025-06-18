@@ -1,6 +1,8 @@
 import React from "react";
 import StarRatingDisplay from "./StarRatingDisplay";
 
+const API_URL = import.meta.env.VITE_API_URL;
+
 function ReviewList({ reviews }) {
   return (
     <div className="review-list">
@@ -16,7 +18,7 @@ function ReviewList({ reviews }) {
               </div>
               {r.photo_url && (
                 <img
-                  src={`http://localhost:5000${r.photo_url}`}
+                  src={`${API_URL}${r.photo_url}`}
                   alt="Review"
                   style={{
                     maxWidth: 120,
